@@ -1,0 +1,18 @@
+<launch>
+	<node name="stage" pkg="stage_ros" type="stageros"
+	      args="$(find lab4)/world/playground.world" />
+	      
+	<rosparam command="load" file="$(find lab4)/params.yaml"/>
+	
+	<node name="planning" pkg="lab4" type="planning" output="screen"
+	     args="$(find lab4)/node/planning.cpp" >
+	<rosparam command="load" file="$(find lab4)/params.yaml"/>
+	</node>
+  	
+	
+	<node name="drive" pkg="lab4" type="drive" output="screen"
+	     args="$(find lab4)/node/drive.cpp" />
+	
+	<node pkg="rviz" type="rviz" name="rviz" args="-d $(find lab4)/launch/config.rviz" output="screen"/>
+</launch>    
+
